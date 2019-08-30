@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- Bloc du menu -->
+        <div id="bloc_menu">
+                <a href="signaler.ejs">Signaler</a>
+                <a href="consulter.ejs">Consulter</a>
+                <a href="etudiant_consulter.ejs">Justificatif</a>
+            </div>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Gestion des Absences</title>
+        
+        <script src="index.js"></script>
+        <script src="https://unpkg.com/bootstrap@4.1.0/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    
+    <body class="m-4">
+        <button class="btn btn-link float-right">
+            <img src="image/logout.png" title="Log out" width="45" height="45"/> </button>
+        <h2 class="text-weight-bold-primary text-center" style="color: blue">Gestion des absences</h2>
+        <span class="font-weight-bold font-italic"></span>
+        <hr />
+
+        <form id="ajouterAbsence" action="/signaler/ajouter/" method="post">
+            <p>
+                <h4 class="text-weight-bold-primary text-left" style="color: blue">Ajouter d'une absence</h4>
+                <hr />
+                <div id="ajouterForm">
+                    Filière: <input type="text" /> </br> 
+                    Cours: <input type="text" />  </br> 
+                    Date: <input type="datetime" /> </br> 
+                    Heure de départ: <input type="time"/> </br> 
+                    Durée: <input type="text"/> </br>
+                </div>
+                <hr />
+
+                <table border="1">
+                    <tr>
+                        <th>No d'étudiant</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Email</th>
+                        <th>Absent</th>
+                    </tr>
+                
+                    <tr>
+                        <th>1</th>
+                        <th>Chang</th>
+                        <th>Tuyen</th>
+                        <th>tuyenchang@gmail.com</th>
+                        <th>
+                            <input type="checkbox" name="check" />
+                        </th>
+                    </tr>               
+                </table>
+                <hr />
+                <button type="submit" id="ajouter" class="btn btn-outline-secondary" ng-click="signaler()" style="color: blue"> Ajouter</button>
+            </p>
+        </form>
+<!--         
+        <ul>
+            <% signalerabsence.forEach(function(signaler, index) { %>
+                <li><a href="/signaler/<%= index %>"></a> <%= signaler %></li>
+            <% }); %>
+        </ul> -->
+    </body>
+</html>
