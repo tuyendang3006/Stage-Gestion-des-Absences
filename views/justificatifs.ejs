@@ -38,71 +38,14 @@
                         <th>App Web et Mobile CM, 08:00:00, 12/05/2019</th>
                         <th>
                             <input type="text" name="justificatifs" id="justificatifs" placeholder="Ecrire..."/>
-                            <a href="image/file.pdf" download>Fichier
-                            </a>
+                            <form action="fileupload" method="post" enctype="multipart/form-data">
+                                <input type="file" name="filetoupload">
+                                <input type="submit" value="Upload">
+                            </form>
                             <hr />
                             <button type="submit" id="justifier" class="btn btn-outline-secondary" ng-click="justifier()" style="color: blue"> Valider</button>
                             <ul>
-            <% justifierAbsence.forEach(function(justifier, index) { %>
-                <li><a href="/consulter/etudiant/<%= index %>"></a> <%= consulter %></li>
-            <% }); %>
-        </ul>
-                        </th>
-                    </tr>               
-                </table>
-                <div/>
-                
-                
-            </p>
-        </form>
-
-    </body>
-</html><!DOCTYPE html>
-
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Gestion des Absences</title>
-        
-        <script src="index.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.min.js"></script>
-        <script src="https://unpkg.com/bootstrap@4.1.0/dist/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css"/>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
-        <link rel="stylesheet" href="css/style.css" />
-    </head>
-    
-    <body ng-controller="mainController" class="m-4">
-        <button class="btn btn-link float-right" ng-click="logout()">
-            <img src="image/logout.png" title="Log out" width="45" height="45"/> </button>
-        <h2 class="text-weight-bold-primary text-center" style="color: blue">Gestion des absences</h2>
-        <span ng-bind="user" class="font-weight-bold font-italic"></span>
-        <hr />
-
-        <form id="ajouterAbsence" action="/signaler/ajouter/" method="post">
-            <p>
-                <h4 class="text-weight-bold-primary text-left" style="color: blue">Consulter l'absence</h4>
-                <hr />
-                <h5 class="text-weight-bold-primary text-left" style="color: blue"> App Web et Mobile</h5>
-                <div id="listesAbsences">
-                    <table border="1">
-                    <tr>
-                        <th>Listes de cours</th>
-                        <th>Justificatifs</th>
-                    </tr>
-                
-                    <tr>
-                        <th>App Web et Mobile CM, 08:00:00, 12/05/2019</th>
-                        <th>
-                            <input type="text" name="justificatifs" id="justificatifs" placeholder="Ecrire..."/>
-                            <a href="image/file.pdf" download>Fichier
-                            </a>
-                            <hr />
-                            <button type="submit" id="justifier" class="btn btn-outline-secondary" ng-click="justifier()" style="color: blue"> Valider</button>
-                            <ul>
-            <% justifierAbsence.forEach(function(justifier, index) { %>
+            <% justificatifs.forEach(function(justificatif, index) { %>
                 <li><a href="/consulter/etudiant/<%= index %>"></a> <%= consulter %></li>
             <% }); %>
         </ul>
