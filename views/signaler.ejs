@@ -7,28 +7,27 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Consulter des Absences</title>
         
-        <script src="index.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
         <script src="https://unpkg.com/bootstrap@4.1.0/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css"/>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
-        <link rel="stylesheet" href="css/style.css" />
+
     </head>
     
-    <body ng-controller="mainController" class="m-4">
-        <button class="btn btn-link float-right" ng-click="logout()">
+    <body class="m-4">
+        <button class="btn btn-link float-right" >
             <img src="image/logout.png" title="Log out" width="45" height="45"/> </button>
         <h2 class="text-weight-bold-primary text-center" style="color: blue">Gestion des absences</h2>
-        <span ng-bind="user" class="font-weight-bold font-italic"></span>
+        <span class="font-weight-bold font-italic"></span>
         <hr />
 
-        <form id="ajouterAbsence" action="/signaler/ajouter/" method="post">
+        <form id="signalerAbsence" action="/signaler/ajouter/" method="post">
             <p>
                 <h4 class="text-weight-bold-primary text-left" style="color: blue">Consulter des absences</h4>
                 <hr />
 
                 <div class="table-wrapper">
-                    <% if (etudiants.length > 0) {%>
+                    <!-- <% if (etudiants.length > 0) {%> -->
                         <table class="table table-hovered">
                             <thead class="thead-dark">
                                 <tr>
@@ -42,7 +41,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% etudiants.forEach((etudiant, index) => { %>
+                                <!-- <% etudiants.forEach((etudiant, index) => { %> -->
                                     <tr>
                                     <th scope="row"><%= etudiant.Id %></th>
                                     <td><%= etudiant.Nom %></td>
@@ -56,7 +55,20 @@
                                         <a href="/valide/<%= etudiant.id %>" class="btn btn-sm btn-success">Valide</a>
                                     </td>
                                     </tr>
-                                <% }) %>
+                                    <!-- <tr>
+                                            <th scope="row"><%= etudiant.Id %></th>
+                                            <td><%= etudiant.Nom %></td>
+                                            <td><%= etudiant.Prenom %></td>
+                                            <td><%= etudiant.Email %></td>
+                                            <td><%= etudiant.Absent %></td>
+                                            <td>
+                                                <a href="/consulter/<%= etudiant.Id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                            </td>
+                                            <td>
+                                                <a href="/valide/<%= etudiant.id %>" class="btn btn-sm btn-success">Valide</a>
+                                            </td>
+                                            </tr> -->
+                                <!-- <% }) %> -->
                             </tbody>
                         </table>
         

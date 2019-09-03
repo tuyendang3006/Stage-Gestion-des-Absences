@@ -88,10 +88,10 @@ app.post('/ajouter', urlencodedParser, function(req, res) {
     var dateAbsences = req.body.dateAbsences;
     var nbHeures = req.body.nbHeures;
     var heureDebut = req.body.heureDebut;
-    res.write('Envoyer nom de cours "' + req.body.nomCours+'".\n');
-    res.write('Envoyer date de absence "' + req.body.dateAbsences+'".\n');
-    res.write('Envoyer la durée "' + req.body.nbHeures+'".\n');
-    res.write('Envoyer le temps de début "' + req.body.heureDebut+'".\n');
+    // res.write('Envoyer nom de cours "' + req.body.nomCours+'".\n');
+    // res.write('Envoyer date de absence "' + req.body.dateAbsences+'".\n');
+    // res.write('Envoyer la durée "' + req.body.nbHeures+'".\n');
+    // res.write('Envoyer le temps de début "' + req.body.heureDebut+'".\n');
 
     conmysql.connect(function(err) {
         if (err) throw err;
@@ -113,22 +113,30 @@ app.get('/signaler', function(req, res, next) {
             console.log(results);
         res.send(results);
     });
-    // var obj = {};
-    // conmysql.query('SELECT * FROM etudiants', function(err, result) {
+   
+});
 
-    //     if(err){
-    //         throw err;
-    //     } else {
-    //         res.render('signaler', {obj: obj});          
-    //     }
-    // });
+// app.get('/ajouter/signaler', function(req, res, next) { 
+//     var sqletudiant = "SELECT * FROM etudiants"; // query database pour afficher la liste d'étudiant
+//     conmysql.query(sqletudiant, function(err, results){
+//         if (err) {
+//             res.redirect('/');
+//         }
+//         res.render('signaler.ejs', {players: result
+//         });
+//     });
+
+// });
+
+app.get('/consulter', function(req, res, next) { 
+    res.render('consulter.ejs', {consulterabsence: req.session.consulterabsence});
 });
 
 app.get('/etudiant', function(req, res, next) { 
     res.render('etudiant_consulter.ejs', {consulterabsence: req.session.consulterabsence});
 });
 
-app.get('justificatifs', function(req, res, next) { 
+app.get('/justificatifs', function(req, res, next) { 
     res.render('justificatifs.ejs', {justifierabsence: req.session.justifierabsence});
 });
 

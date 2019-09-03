@@ -7,22 +7,21 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Consulter des Absences</title>
         
-        <script src="index.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
         <script src="https://unpkg.com/bootstrap@4.1.0/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css"/>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
-        <link rel="stylesheet" href="css/style.css" />
+
     </head>
     
-    <body ng-controller="mainController" class="m-4">
+    <body class="m-4">
         <button class="btn btn-link float-right" ng-click="logout()">
             <img src="image/logout.png" title="Log out" width="45" height="45"/> </button>
         <h2 class="text-weight-bold-primary text-center" style="color: blue">Gestion des absences</h2>
-        <span ng-bind="user" class="font-weight-bold font-italic"></span>
+        <span class="font-weight-bold font-italic"></span>
         <hr />
 
-        <form id="ajouterAbsence" action="/signaler/ajouter/" method="post">
+        <form id="consulterAbsence" action="/signaler/ajouter/" method="post">
             <p>
                 <h4 class="text-weight-bold-primary text-left" style="color: blue">Consulter des absences</h4>
                 <hr />
