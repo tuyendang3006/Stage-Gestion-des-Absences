@@ -13,7 +13,7 @@ module.exports = {
         let message = '';
         let nomCours = req.body.nomCours;
         let dateAbsences = req.body.dateAbsences;
-        let nbHeures = req.body.nomHeures;
+        let nbHeures = req.body.nbHeures;
         let heureDebut = req.body.heureDebut;
 
         let absenceQuery = "SELECT * FROM `absences` WHERE nomCours = '" + nomCours + "'";

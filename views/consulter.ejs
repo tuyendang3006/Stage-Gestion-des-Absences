@@ -27,12 +27,17 @@
                 <h4 class="text-weight-bold-primary text-left" style="color: blue">Consulter des absences</h4>
                 <hr />
                 <div id="ajouterForm">
-                    Filière: <input type="text" /> </br> 
-                    Cours: <input type="text" />  </br> 
-                    Date: <input type="datetime" /> </br> 
-                    Heure de départ: <input type="time"/> </br> 
-                    Durée: <input type="text"/> </br>
+                    <% absences.forEach((absence, index) => { %>
+                        <tr>
+                            Cours: <%= absence.idabsences %>  </br>
+                            Date: <%= absence.dateAbsences %> </br> 
+                            Heure de départ: <%= absence.heureDebut %> </br> 
+                            Durée: <%= absence.nbHeures %></br>
+                        
+                        </tr>
+                    <% }) %>
                 </div>
+                
                 <hr />
 
                 <div class="table-wrapper">
@@ -50,7 +55,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% etudiant.forEach((etudiant, index) => { %>
+                                <% etudiants.forEach((etudiant, index) => { %>
                                     <tr>
                                     <th scope="row"><%= etudiant.Id %></th>
                                     <td><%= etudiant.Nom %></td>
@@ -70,7 +75,7 @@
         
                 </div>
                 <hr />
-                <button type="submit" id="ajouter" class="btn btn-outline-secondary" ng-click="signaler()" style="color: blue"> Ajouter</button>
+                <button type="submit" id="ajouter" class="btn btn-outline-secondary" ng-click="signaler()" style="color: blue"> Valider</button>
             </p>
         </form>
 <!--         

@@ -1,14 +1,17 @@
 var express = require('express');
 var app = express();
 
-const {getHomePage} = require('./routes/index');
-//const {ajouterEtudiantPage, AjouterEtudiant} = require('./routes/etudiant');
-//const {ajouterAbsencePage, AjouterAbsence} = require('./routes/absence');
-
 // On utilise les cookies, les sessions et les formulaires
 var session = require('cookie-session'); // Charge le middleware de sessions
 var bodyParser = require('body-parser'); // Charge le middleware de gestion des paramètres
+var fileUpload = require('express-fileupload');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+
+//const {getHomePage} = require('./routes/index');
+//const {ajouterEtudiantPage, AjouterEtudiant} = require('./routes/etudiant');
+//const {ajouterAbsencePage, AjouterAbsence} = require('./routes/absence');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -21,16 +24,8 @@ app.set("views", "./views");
 app.use(fileUpload()); 
 
 
-
 /* On utilise les sessions */
-//Ou: app.use(session({secret: 'signalersecret'}))
-app.use(
-    session({
-      resave: false,
-      saveUninitialized: false,
-      secret: 'signalersecret'
-    })
-);
+app.use(session({secret: 'signalersecret'}))
 
 // mysql pour la base de donnée
 var mysql = require('mysql');
@@ -61,36 +56,88 @@ app.use(function(req, res, next){
     next();
 });
 
-
-/* On affiche la signalerabsence et le formulaire */
-app.get('/signaler', function(req, res, next) { 
-    res.render('signaler.ejs', {signalerabsence: req.session.signalerabsence});
+app.use(function(req, res, next){
+    if (typeof(req.session.consulterabsence) == 'undefined') {
+        req.session.consulterabsence = [];
+    }
+    next();
 });
 
-app.get('/consulter', function(req, res, next) { 
-    res.render('consulter.ejs', {signalerabsence: req.session.signalerabsence});
+app.use(function(req, res, next){
+    if (typeof(req.session.justifierabsence) == 'undefined') {
+        req.session.justifierabsence = [];
+    }
+    next();
+});
+
+
+/* On affiche la signalerabsence et le formulaire */
+app.get('/ajouter', function(req, res, next) { 
+    // var sql = "SELECT * FROM etudiants";
+    //     conmysql.query(sql, function(err, results){
+    //        if(err) throw err;
+    //            console.log(results);
+    //         res.send(results);
+    // });
+    res.render('ajouter.ejs', {signalerabsence: req.session.signalerabsence});
+});
+
+/* On ajoute un élément à la signalerabsence */
+app.post('/ajouter', urlencodedParser, function(req, res) {
+    var nomCours = req.body.nomCours;
+    var dateAbsences = req.body.dateAbsences;
+    var nbHeures = req.body.nbHeures;
+    var heureDebut = req.body.heureDebut;
+    res.write('Envoyer nom de cours "' + req.body.nomCours+'".\n');
+    res.write('Envoyer date de absence "' + req.body.dateAbsences+'".\n');
+    res.write('Envoyer la durée "' + req.body.nbHeures+'".\n');
+    res.write('Envoyer le temps de début "' + req.body.heureDebut+'".\n');
+
+    conmysql.connect(function(err) {
+        if (err) throw err;
+        var sql = "INSERT INTO absences (nomCours, dateAbsences, nbHeures, heureDebut) VALUES ('"+nomCours+"', '"+dateAbsences+"','"+nbHeures+"','"+heureDebut+"')";
+        conmysql.query(sql, function (err, result) {
+            if (err) throw err;
+                console.log("1 record inserted");
+            res.end();
+        });
+    });
+
+});
+
+// afficher le signaler page
+app.get('/signaler', function(req, res, next) { 
+    var sql = "SELECT * FROM etudiants";
+    conmysql.query(sql, function(err, results){
+        if(err) throw err;
+            console.log(results);
+        res.send(results);
+    });
+    // var obj = {};
+    // conmysql.query('SELECT * FROM etudiants', function(err, result) {
+
+    //     if(err){
+    //         throw err;
+    //     } else {
+    //         res.render('signaler', {obj: obj});          
+    //     }
+    // });
+});
+
+app.get('/etudiant', function(req, res, next) { 
+    res.render('etudiant_consulter.ejs', {consulterabsence: req.session.consulterabsence});
 });
 
 app.get('justificatifs', function(req, res, next) { 
-    res.render('justificatifs.ejs', {signalerabsence: req.session.signalerabsence});
+    res.render('justificatifs.ejs', {justifierabsence: req.session.justifierabsence});
 });
 
-
-
-/* On ajoute un élément à la signalerabsence */
-app.post('/signaler/ajouter/', urlencodedParser, function(req, res) {
-
-    if (req.body.newabsence != '') {
-        req.session.signalerabsence.push(req.body.newabsence);
-    }
-    res.redirect('/signaler', { data: req.body });
-});
 
 //app.get('/signaler', getHomePage);
 
 /* On redirige vers la signalerabsence si la page demandée n'est pas trouvée */
 app.use(function(req, res, next){
-    res.redirect('/signaler');
+    res.redirect('/ajouter');
 });
 
 app.listen(8000, () => {

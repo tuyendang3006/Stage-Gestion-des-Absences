@@ -26,14 +26,6 @@
             <p>
                 <h4 class="text-weight-bold-primary text-left" style="color: blue">Consulter l'absence</h4>
                 <hr />
-                <div id="etudiantInfos">
-                    Filière: <input type="text" /> </br> 
-                    Cours: <input type="text" />  </br> 
-                    Date: <input type="datetime" /> </br> 
-                    Heure de départ: <input type="time"/> </br> 
-                    Durée: <input type="text"/> </br>
-                </div>
-                <hr />
                 <h5 class="text-weight-bold-primary text-left" style="color: blue">Listes de cours</h5>
                 <div id="listesCours">
                     <button type="submit" ng-click="getAbsence(); getListes()" class="btn btn-link mt-3">  
@@ -44,11 +36,6 @@
                 
             </p>
         </form>
-<!--         
-        <ul>
-            <% signalerabsence.forEach(function(signaler, index) { %>
-                <li><a href="/signaler/<%= index %>"></a> <%= signaler %></li>
-            <% }); %>
-        </ul> -->
+
     </body>
 </html>
