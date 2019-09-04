@@ -64,6 +64,13 @@ app.use(function(req, res, next){
 });
 
 app.use(function(req, res, next){
+    if (typeof(req.session.consultervalide) == 'undefined') {
+        req.session.consultervalide = [];
+    }
+    next();
+});
+
+app.use(function(req, res, next){
     if (typeof(req.session.justifierabsence) == 'undefined') {
         req.session.justifierabsence = [];
     }
@@ -129,7 +136,7 @@ app.get('/signaler', function(req, res, next) {
 // });
 
 app.get('/consulter', function(req, res, next) { 
-    res.render('consulter.ejs', {consulterabsence: req.session.consulterabsence});
+    res.render('signaler.ejs', {consultervalide: req.session.consultervalide});
 });
 
 app.get('/etudiant', function(req, res, next) { 
@@ -143,7 +150,7 @@ app.get('/justificatifs', function(req, res, next) {
 
 //app.get('/signaler', getHomePage);
 
-/* On redirige vers la signalerabsence si la page demandée n'est pas trouvée */
+/* On redirige vers la ajouterabsence si la page demandée n'est pas trouvée */
 app.use(function(req, res, next){
     res.redirect('/ajouter');
 });

@@ -43,6 +43,19 @@
                             <tbody>
                                 <!-- <% etudiants.forEach((etudiant, index) => { %> -->
                                     <tr>
+                                    <th scope="row">e123</th>
+                                    <td>Chang</td>
+                                    <td>Chen</td>
+                                    <td>changchen@gmail.com</td>
+                                    <td><input type="checkbox" name="check" /></td>
+                                    <td>
+                                        <a href="/consulter/<%= etudiant.Id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Voir</a>
+                                    </td>
+                                    <td>
+                                        <a href="/valide/<%= etudiant.id %>" class="btn btn-sm btn-success">Valide</a>
+                                    </td>
+                                    </tr>
+                                   <!-- <tr>
                                     <th scope="row"><%= etudiant.Id %></th>
                                     <td><%= etudiant.Nom %></td>
                                     <td><%= etudiant.Prenom %></td>
@@ -54,21 +67,7 @@
                                     <td>
                                         <a href="/valide/<%= etudiant.id %>" class="btn btn-sm btn-success">Valide</a>
                                     </td>
-                                    </tr>
-                                    <!-- <tr>
-                                            <th scope="row"><%= etudiant.Id %></th>
-                                            <td><%= etudiant.Nom %></td>
-                                            <td><%= etudiant.Prenom %></td>
-                                            <td><%= etudiant.Email %></td>
-                                            <td><%= etudiant.Absent %></td>
-                                            <td>
-                                                <a href="/consulter/<%= etudiant.Id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                                            </td>
-                                            <td>
-                                                <a href="/valide/<%= etudiant.id %>" class="btn btn-sm btn-success">Valide</a>
-                                            </td>
-                                            </tr> -->
-                                <!-- <% }) %> -->
+                                    </tr> -->
                             </tbody>
                         </table>
         
